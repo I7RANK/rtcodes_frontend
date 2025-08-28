@@ -6,6 +6,7 @@ import Image from "next/image";
 export default function CreateStoreForm() {
   const [form, setForm] = useState({ name: "", address: "", city: "" });
   const [isLoading, setIsLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
   const cities = ["Barranquilla", "Bogota", "Cali"];
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -26,6 +27,7 @@ export default function CreateStoreForm() {
         );
       }
       resetForm();
+      showSuccessMessage();
     } catch (error) {
       console.error(error);
     } finally {
@@ -35,6 +37,11 @@ export default function CreateStoreForm() {
 
   const resetForm = async () => {
     setForm({ name: "", address: "", city: "" });
+  };
+
+  const showSuccessMessage = () => {
+    setSuccess(true);
+    setTimeout(() => setSuccess(false), 3000);
   };
 
   return (
@@ -104,7 +111,14 @@ export default function CreateStoreForm() {
           "Añadir Tienda"
         )}
       </button>
-      {JSON.stringify(form, null, 2)}
+
+      <p
+        className={`mt-2 text-center text-sm font-semibold text-green-600 transition-opacity ${
+          success ? "opacity-100" : "opacity-0"
+        }`}
+      >
+        Tienda Añadida Correctamente
+      </p>
     </form>
   );
 }
