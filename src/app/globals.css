@@ -1,1 +1,20 @@
-@import 'tailwindcss';
+@import "tailwindcss";
+
+@layer base {
+  form {
+    @apply flex w-full flex-col rounded-lg bg-white p-4 shadow-md;
+  }
+
+  form label,
+  form legend {
+    @apply text-sm font-bold;
+  }
+
+  form input {
+    @apply text-sm;
+  }
+
+  input[type="text"] {
+    @apply w-full rounded-sm border border-gray-300 px-2 py-1 outline-amber-400;
+  }
+}
