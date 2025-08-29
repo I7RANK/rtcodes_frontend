@@ -4,7 +4,23 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 
 export default function Stores() {
-  const [stores, setStores] = useState<any[]>([]);
+  type Store = {
+    _id?: string;
+    name: string;
+    address?: string;
+    city?: string;
+    currentCode?: {
+      code: string;
+      createdAt: Date;
+    };
+    codesHistory: {
+      code: string;
+      createdAt: Date;
+    }[];
+    createdAt?: Date;
+    updatedAt?: Date;
+  };
+  const [stores, setStores] = useState<Store[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
