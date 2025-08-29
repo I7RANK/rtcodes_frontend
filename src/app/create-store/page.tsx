@@ -6,7 +6,6 @@ export default function CreateStore() {
       <section className="relative w-full px-4">
         <CreateStoreForm />
       </section>
-      <div className="absolute top-0 -z-10 h-52 w-full bg-linear-to-br from-sky-800 to-sky-950"></div>
     </div>
   );
 }

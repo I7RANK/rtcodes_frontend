@@ -10,8 +10,8 @@
     @apply text-sm font-bold;
   }
 
-  form input {
-    @apply text-sm;
+  input {
+    @apply bg-white text-sm;
   }
 
   input[type="text"] {
