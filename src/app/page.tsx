@@ -1,15 +1,22 @@
-import Link from 'next/link';
+import Link from "next/link";
 
 export default function Home() {
   return (
     <div>
-      <h1>Bienvenidos</h1>
-      <Link
-        className="bg-gray-50 py-2 px-4 rounded-md text-black active:bg-gray-100"
-        href="/create-store"
-      >
-        Crear tienda
-      </Link>
+      <h1 className="py-20 text-center text-4xl text-white">Bienvenidos</h1>
+
+      <div className="mt-5 flex flex-col items-center justify-center gap-y-2">
+        <Link href="/stores">
+          <button className="rounded-sm bg-sky-900 px-4 py-2 text-sm text-white">
+            Ver todas las tiendas
+          </button>
+        </Link>
+        <Link href="/create-store">
+          <button className="rounded-sm bg-sky-900 px-4 py-2 text-sm text-white">
+            Agregar Nueva Tienda
+          </button>
+        </Link>
+      </div>
     </div>
   );
 }
