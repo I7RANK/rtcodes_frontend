@@ -6,21 +6,33 @@ import { Store } from "@/types/store.type";
 
 export default function Stores() {
   const [stores, setStores] = useState<Store[]>([]);
+  const [searchValue, setSearchValue] = useState("");
   const [isLoading, setIsLoading] = useState(true);
 
-  useEffect(() => {
-    const fetchStores = async () => {
-      try {
-        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/stores`); // <-- ajusta tu endpoint
-        const data = await res.json();
-        setStores(data);
-      } catch (error) {
-        console.error("Error fetching stores:", error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
+  const fetchStores = async (name?: string) => {
+    setIsLoading(true);
+    let url = `${process.env.NEXT_PUBLIC_API_URL}/stores`;
+    if (name) url += `?name=${name}`;
+    try {
+      const res = await fetch(url);
+      const data = await res.json();
+      setStores(data);
+    } catch (error) {
+      console.error("Error fetching stores:", error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
+  useEffect(() => {
+    const delayDebounce = setTimeout(() => {
+      fetchStores(searchValue);
+    }, 1000);
+
+    return () => clearTimeout(delayDebounce);
+  }, [searchValue]);
+
+  useEffect(() => {
     fetchStores();
   }, []);
 
@@ -29,9 +41,11 @@ export default function Stores() {
       <div>
         <input
           className="text-xl"
+          value={searchValue}
           id="search"
           type="text"
           placeholder="Buscar por nombre"
+          onChange={(e) => setSearchValue(e.target.value)}
         />
       </div>
 
