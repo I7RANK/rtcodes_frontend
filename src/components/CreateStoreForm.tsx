@@ -53,17 +53,20 @@ export default function CreateStoreForm() {
       </p>
       <div className="mt-2 flex flex-col gap-y-2">
         <div>
-          <label htmlFor="name">Nombre de la tienda: </label>
+          <label htmlFor="name">
+            Nombre de la tienda <span className="text-red-400">*</span>
+          </label>
           <input
             id="name"
             type="text"
             placeholder="Frisby"
+            required
             value={form.name}
             onChange={(e) => setForm({ ...form, name: e.target.value })}
           />
         </div>
         <div>
-          <label htmlFor="address">Dirección: </label>
+          <label htmlFor="address">Dirección</label>
           <input
             id="address"
             type="text"
@@ -73,14 +76,17 @@ export default function CreateStoreForm() {
           />
         </div>
         <fieldset>
-          <legend>Ciudad:</legend>
+          <legend>
+            Ciudad <span className="text-red-400">*</span>
+          </legend>
           {cities.map((city) => {
             return (
               <div key={city}>
                 <input
+                  id={city}
                   type="radio"
                   name="city"
-                  id={city}
+                  required
                   value={city}
                   checked={form.city === city}
                   onChange={(e) => setForm({ ...form, city: e.target.value })}

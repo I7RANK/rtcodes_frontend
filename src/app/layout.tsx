@@ -23,6 +23,7 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  console.log("ping");
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/ping`);
   console.log(`(\x1b[32m${res.status}\x1b[0m) ${await res.text()}`);
   return (
