@@ -33,7 +33,7 @@ export default function Stores() {
   const updateCurrentCode = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!selectedStore?._id) return;
-    let url = `${process.env.NEXT_PUBLIC_API_URL}/stores/${selectedStore?._id}/code`;
+    const url = `${process.env.NEXT_PUBLIC_API_URL}/stores/${selectedStore?._id}/code`;
 
     try {
       setIsLoadingCodeFetch(true);
