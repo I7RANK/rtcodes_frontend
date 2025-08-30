@@ -2,24 +2,9 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import { Store } from "@/types/store.type";
 
 export default function Stores() {
-  type Store = {
-    _id?: string;
-    name: string;
-    address?: string;
-    city?: string;
-    currentCode?: {
-      code: string;
-      createdAt: Date;
-    };
-    codesHistory: {
-      code: string;
-      createdAt: Date;
-    }[];
-    createdAt?: Date;
-    updatedAt?: Date;
-  };
   const [stores, setStores] = useState<Store[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
