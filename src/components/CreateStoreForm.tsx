@@ -7,7 +7,7 @@ export default function CreateStoreForm() {
   const [form, setForm] = useState({ name: "", address: "", city: "" });
   const [isLoading, setIsLoading] = useState(false);
   const [success, setSuccess] = useState(false);
-  const cities = ["Barranquilla", "Bogota", "Cali"];
+  const cities = ["Barranquilla", "Bogotá", "Cali"];
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
