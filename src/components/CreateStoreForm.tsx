@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import Image from "next/image";
+import Spinner from "@/components/Spinner";
 
 export default function CreateStoreForm() {
   const [form, setForm] = useState({ name: "", address: "", city: "" });
@@ -45,7 +45,10 @@ export default function CreateStoreForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form
+      onSubmit={handleSubmit}
+      className="flex w-full flex-col rounded-lg bg-white p-4 shadow-md"
+    >
       <h1 className="text-lg font-bold">Añadir nueva tienda</h1>
       <p className="mt-1 text-sm text-gray-500">
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia
@@ -105,17 +108,7 @@ export default function CreateStoreForm() {
         disabled={isLoading}
         type="submit"
       >
-        {isLoading ? (
-          <Image
-            className="animate-spin"
-            src="/spinner.svg"
-            alt="spinner"
-            width={24}
-            height={24}
-          />
-        ) : (
-          "Añadir Tienda"
-        )}
+        {isLoading ? <Spinner /> : "Añadir Tienda"}
       </button>
 
       <p
