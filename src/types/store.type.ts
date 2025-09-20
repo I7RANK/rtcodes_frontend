@@ -1,16 +1,15 @@
+export type CurrentCode = {
+  code: string;
+  createdAt: Date;
+};
+
 export type Store = {
   _id: string;
   name: string;
   address?: string;
   city?: string;
-  currentCode?: {
-    code: string;
-    createdAt: Date;
-  };
-  codesHistory: {
-    code: string;
-    createdAt: Date;
-  }[];
+  currentCode?: CurrentCode;
+  codesHistory: CurrentCode[];
   createdAt: Date;
   updatedAt: Date;
 };
