@@ -94,22 +94,27 @@ export default function Stores() {
         />
       </div>
 
-      <div className="mt-8 grid gap-4">
+      <div>
         {isLoading ? (
           <p className="text-green-300">Cargando tiendas...</p>
         ) : stores.length ? (
-          stores.map((store) => (
-            <StoreCard
-              key={store._id}
-              name={store.name}
-              address={store.address}
-              city={store.city}
-              currentCode={store.currentCode}
-              onAddCode={() => setSelectedStore(store)}
-            />
-          ))
+          <div className="mt-8 grid gap-4">
+            {stores.map((store) => (
+              <StoreCard
+                key={store._id}
+                name={store.name}
+                address={store.address}
+                city={store.city}
+                currentCode={store.currentCode}
+                onAddCode={() => setSelectedStore(store)}
+              />
+            ))}
+            <Button className="mt-4" onClick={() => setIsAddingNewStore(true)}>
+              Agregar Tienda
+            </Button>
+          </div>
         ) : (
-          <div className="flex items-center justify-center gap-x-2">
+          <div className="mt-8 flex items-center justify-center gap-x-2">
             <p className="text-white">No encontraste la tienda?</p>
             <Button
               variant="secondary"
