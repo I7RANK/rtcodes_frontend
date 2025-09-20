@@ -3,11 +3,19 @@
 import { useState } from "react";
 import Spinner from "@/components/Spinner";
 
-export default function CreateStoreForm() {
-  const [form, setForm] = useState({ name: "", address: "", city: "" });
+export default function CreateStoreForm({
+  onSubmit = () => {},
+}: {
+  onSubmit?: Function;
+}) {
+  const [form, setForm] = useState({
+    name: "",
+    address: "",
+    city: "Barranquilla",
+  });
   const [isLoading, setIsLoading] = useState(false);
   const [success, setSuccess] = useState(false);
-  const cities = ["Barranquilla", "Bogotá", "Cali"];
+  const cities = ["Barranquilla"];
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -28,6 +36,7 @@ export default function CreateStoreForm() {
       }
       resetForm();
       showSuccessMessage();
+      onSubmit();
     } catch (error) {
       console.error(error);
     } finally {
@@ -45,15 +54,8 @@ export default function CreateStoreForm() {
   };
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      className="flex w-full flex-col rounded-lg bg-white p-4 shadow-md"
-    >
+    <form onSubmit={handleSubmit} className="flex w-full flex-col">
       <h1 className="text-lg font-bold">Añadir nueva tienda</h1>
-      <p className="mt-1 text-sm text-gray-500">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia
-        explicabo aliquid culpa vitae fugiat? Quaerat tenetur
-      </p>
       <div className="mt-2 flex flex-col gap-y-2">
         <div>
           <label htmlFor="name">
@@ -104,7 +106,7 @@ export default function CreateStoreForm() {
       </div>
 
       <button
-        className="mt-4 flex items-center justify-center rounded-md bg-sky-400 px-4 py-2 shadow disabled:bg-gray-200 disabled:inset-shadow-sm"
+        className="mt-4 flex items-center justify-center rounded-md bg-sky-400 px-4 py-2 shadow active:bg-sky-400/80 disabled:bg-gray-200 disabled:inset-shadow-sm"
         disabled={isLoading}
         type="submit"
       >

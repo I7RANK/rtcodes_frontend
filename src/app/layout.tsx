@@ -32,11 +32,6 @@ export default async function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} relative flex min-h-screen flex-col antialiased`}
       >
         <main className="flex-1">
-          <Link href="/">
-            <button className="mt-3 ml-3 rounded-sm bg-gray-100 px-4 py-2 text-sm">
-              Inicio
-            </button>
-          </Link>
           {children}
           <div className="absolute top-0 -z-10 h-52 w-full bg-linear-to-br from-sky-800 to-sky-950"></div>
         </main>

@@ -7,6 +7,7 @@ import Modal from "@/components/Modal";
 import Button from "@/components/Button";
 import Spinner from "@/components/Spinner";
 import StoreCard from "@/components/StoreCard";
+import CreateStoreForm from "@/components/CreateStoreForm";
 
 export default function Stores() {
   const [stores, setStores] = useState<Store[]>([]);
@@ -15,6 +16,7 @@ export default function Stores() {
   const [isLoadingCodeFetch, setIsLoadingCodeFetch] = useState(false);
   const [selectedStore, setSelectedStore] = useState<Store>();
   const [storeCode, setStoreCode] = useState("");
+  const [isAddingNewStore, setIsAddingNewStore] = useState(false);
 
   const fetchStores = async (name?: string) => {
     setIsLoading(true);
@@ -46,7 +48,7 @@ export default function Stores() {
         body: JSON.stringify({ code: storeCode }),
       });
       if (res.ok) {
-        closeModal();
+        closeCodesModal();
         fetchStores();
       }
     } catch (error) {
@@ -56,10 +58,16 @@ export default function Stores() {
     }
   };
 
-  const closeModal = () => {
+  const closeCodesModal = () => {
     console.log("closeModal");
     setStoreCode("");
     setSelectedStore(undefined);
+  };
+
+  const onCreatedStore = () => {
+    setTimeout(() => {
+      setIsAddingNewStore(false);
+    }, 3000);
   };
 
   useEffect(() => {
@@ -90,7 +98,7 @@ export default function Stores() {
       <div className="mt-8 grid gap-4">
         {isLoading ? (
           <p className="text-green-300">Cargando tiendas...</p>
-        ) : (
+        ) : stores.length ? (
           stores.map((store) => (
             <StoreCard
               key={store._id}
@@ -101,22 +109,24 @@ export default function Stores() {
               onAddCode={() => setSelectedStore(store)}
             />
           ))
+        ) : (
+          <div className="flex items-center justify-center gap-x-2">
+            <p className="text-white">No encontraste la tienda?</p>
+            <Button
+              variant="secondary"
+              onClick={() => setIsAddingNewStore(true)}
+            >
+              Agregar Tienda
+            </Button>
+          </div>
         )}
-      </div>
-
-      <div className="mt-8 flex justify-center">
-        <Link href="/create-store">
-          <button className="rounded-sm bg-sky-900 px-4 py-2 text-sm text-white">
-            Agregar Nueva Tienda
-          </button>
-        </Link>
       </div>
 
       <Modal
         key={selectedStore?._id}
         isOpen={selectedStore?._id !== undefined}
         onClose={() => {
-          if (!isLoadingCodeFetch) closeModal();
+          if (!isLoadingCodeFetch) closeCodesModal();
         }}
       >
         <div>
@@ -138,6 +148,15 @@ export default function Stores() {
             </div>
           </form>
         </div>
+      </Modal>
+
+      <Modal
+        isOpen={isAddingNewStore}
+        onClose={() => {
+          setIsAddingNewStore(false);
+        }}
+      >
+        <CreateStoreForm onSubmit={onCreatedStore} />
       </Modal>
     </div>
   );
