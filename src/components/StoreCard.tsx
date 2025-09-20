@@ -6,7 +6,7 @@ type StoreCardProps = Readonly<{
   address: string | undefined;
   city: string | undefined;
   currentCode?: CurrentCode;
-  onAddCode: Function;
+  onAddCode: () => void;
 }>;
 
 export default function StoreCard({

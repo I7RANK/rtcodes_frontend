@@ -6,7 +6,7 @@ import Spinner from "@/components/Spinner";
 export default function CreateStoreForm({
   onSubmit = () => {},
 }: {
-  onSubmit?: Function;
+  onSubmit?: () => void;
 }) {
   const [form, setForm] = useState({
     name: "",
